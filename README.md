@@ -1,5 +1,7 @@
 # AI Dashboard App
 
+## Features
+
 This project is a simple Flask-based dashboard that aggregates information related to Artificial Intelligence:
 
 - Top AI news stories from Hacker News
