@@ -45,6 +45,7 @@ def fetch_huggingface_models():
         "limit": 5,
         "sort": "downloads",
     }
+    main
     try:
         r = requests.get(HFACE_URL, params=params, timeout=10)
         r.raise_for_status()

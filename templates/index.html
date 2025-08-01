@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -59,7 +58,7 @@
             </ul>
         </section>
         <section id="videos">
-            <h2>Popular AI Videos</h2>
+ <h2>Popular AI Videos</h2>
             <ul>
                 {% for v in videos %}
                 <li><a href="{{ v.url }}" target="_blank">{{ v.title }}</a></li>
