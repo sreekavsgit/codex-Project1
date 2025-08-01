@@ -3,63 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>AI Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
-<body>
-    <nav>
-        <h1>AI Dashboard</h1>
-    </nav>
-    <main>
-        <section>
-            <h2>Top AI News</h2>
-            <ul>
-                {% for item in news %}
-                <li><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></li>
-                {% else %}
-                <li>No data</li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <h2>Popular GitHub AI Repos</h2>
-            <ul>
-                {% for repo in repos %}
-                <li><a href="{{ repo.html_url }}" target="_blank">{{ repo.full_name }}</a></li>
-                {% else %}
-                <li>No data</li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <h2>Top HuggingFace Models</h2>
-            <ul>
-                {% for m in models %}
-                <li><a href="https://huggingface.co/{{ m.id }}" target="_blank">{{ m.id }}</a></li>
-                {% else %}
-                <li>No data</li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <h2>Latest AI Papers</h2>
-            <ul>
-                {% for p in papers %}
-                <li><a href="{{ p.url }}" target="_blank">{{ p.title }}</a></li>
-                {% else %}
-                <li>No data</li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <h2>Popular AI Videos</h2>
-            <ul>
-                {% for v in videos %}
-                <li><a href="{{ v.url }}" target="_blank">{{ v.title }}</a></li>
-                {% else %}
-                <li>Set YOUTUBE_API_KEY to enable video data.</li>
-                {% endfor %}
-            </ul>
-        </section>
-    </main>
+<body class="bg-gray-950 text-gray-200">
+    <div id="root"></div>
+    <script>
+        window.__DATA__ = {
+            user: {{ user|tojson }},
+            news: {{ news|tojson }}
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            window.renderDashboard(window.__DATA__);
+        });
+    </script>
+    <script type="text/babel" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>
