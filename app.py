@@ -41,6 +41,10 @@ def fetch_github_repos():
 
 
 def fetch_huggingface_models():
+    params = {
+        "limit": 5,
+        "sort": "downloads",
+    }
     try:
         r = requests.get(HFACE_URL, params=params, timeout=10)
         r.raise_for_status()
@@ -106,6 +110,7 @@ def index():
     models = fetch_huggingface_models()
     papers = fetch_arxiv_papers()
     videos = fetch_youtube_videos()
+    user = {"name": "AI Enthusiast", "avatar": "https://via.placeholder.com/40"}
     return render_template(
         "index.html",
         news=news,
@@ -113,6 +118,7 @@ def index():
         models=models,
         papers=papers,
         videos=videos,
+        user=user,
     )
 
 
