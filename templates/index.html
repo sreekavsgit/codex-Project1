@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <h1>AI Dashboard</h1>
+        <ul>
+            <li><a href="#news">News</a></li>
+            <li><a href="#repos">Repos</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#papers">Papers</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#blogs">Blogs</a></li>
+        </ul>
+    </nav>
+    <header class="hero">
+        <h1>Stay on Top of AI</h1>
+        <p>The latest news, tools, papers and more.</p>
+    </header>
+    <main>
+        <section id="news">
+            <h2>Top AI News</h2>
+            <ul>
+                {% for item in news %}
+                <li><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></li>
+                {% else %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="repos">
+            <h2>Popular GitHub AI Repos</h2>
+            <ul>
+                {% for repo in repos %}
+                <li><a href="{{ repo.html_url }}" target="_blank">{{ repo.full_name }}</a></li>
+                {% else %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="models">
+            <h2>Top HuggingFace Models</h2>
+            <ul>
+                {% for m in models %}
+                <li><a href="https://huggingface.co/{{ m.id }}" target="_blank">{{ m.id }}</a></li>
+                {% else %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="papers">
+            <h2>Latest AI Papers</h2>
+            <ul>
+                {% for p in papers %}
+                <li><a href="{{ p.url }}" target="_blank">{{ p.title }}</a></li>
+                {% else %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="videos">
+            <h2>Popular AI Videos</h2>
+            <ul>
+                {% for v in videos %}
+                <li><a href="{{ v.url }}" target="_blank">{{ v.title }}</a></li>
+                {% else %}
+                <li>Set YOUTUBE_API_KEY to enable video data.</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="blogs">
+            <h2>AI Blog Posts</h2>
+            <ul>
+                {% for b in blogs %}
+                <li><a href="{{ b.url }}" target="_blank">{{ b.title }}</a></li>
+                {% else %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
