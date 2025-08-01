@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>AI Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -24,6 +25,9 @@
     </header>
     <main>
         <section id="news">
+    </nav>
+    <main>
+        <section>
             <h2>Top AI News</h2>
             <ul>
                 {% for item in news %}
@@ -34,6 +38,7 @@
             </ul>
         </section>
         <section id="repos">
+        <section>
             <h2>Popular GitHub AI Repos</h2>
             <ul>
                 {% for repo in repos %}
@@ -44,6 +49,7 @@
             </ul>
         </section>
         <section id="models">
+        <section>
             <h2>Top HuggingFace Models</h2>
             <ul>
                 {% for m in models %}
@@ -54,6 +60,7 @@
             </ul>
         </section>
         <section id="papers">
+        <section>
             <h2>Latest AI Papers</h2>
             <ul>
                 {% for p in papers %}
@@ -64,6 +71,7 @@
             </ul>
         </section>
         <section id="videos">
+        <section>
             <h2>Popular AI Videos</h2>
             <ul>
                 {% for v in videos %}

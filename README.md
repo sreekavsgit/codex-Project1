@@ -1,6 +1,5 @@
 # AI Dashboard App
 
-## Features
 
 This project is a simple Flask-based dashboard that aggregates information related to Artificial Intelligence:
 
@@ -9,7 +8,6 @@ This project is a simple Flask-based dashboard that aggregates information relat
 - Trending HuggingFace models
 - Recently submitted AI papers on arXiv
 - Most viewed AI videos on YouTube (requires a YouTube API key)
-- Recent AI blog posts from Medium
 
 ## Running locally
 

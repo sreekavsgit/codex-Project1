@@ -14,6 +14,7 @@ YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 MEDIUM_RSS_URL = "https://towardsdatascience.com/tagged/ai?format=rss"
 
 
+
 def fetch_hn_news():
     params = {
         "query": "AI",
@@ -47,6 +48,7 @@ def fetch_huggingface_models():
         "limit": 5,
         "sort": "downloads",
     }
+
     try:
         r = requests.get(HFACE_URL, params=params, timeout=10)
         r.raise_for_status()
@@ -105,6 +107,7 @@ def fetch_youtube_videos():
         return []
 
 
+
 def fetch_medium_posts():
     """Return latest AI blog posts from Medium."""
     try:
@@ -115,7 +118,6 @@ def fetch_medium_posts():
         return entries
     except Exception:
         return []
-
 
 @app.route("/")
 def index():
@@ -133,6 +135,7 @@ def index():
         papers=papers,
         videos=videos,
         blogs=blogs,
+
     )
 
 
