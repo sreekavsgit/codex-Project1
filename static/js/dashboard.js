@@ -62,19 +62,34 @@ function SearchFilters() {
   );
 }
 
-function PostCard({ post }) {
+function Section({ title, items }) {
   return (
-    React.createElement('div', { className: 'bg-gray-800 rounded-lg p-4 shadow' },
-      React.createElement('h3', { className: 'text-white mb-2 text-lg' }, post.title),
-      React.createElement('a', { href: post.url, target: '_blank', className: 'text-indigo-400' }, 'Read more')
+    React.createElement('section', { className: 'bg-gray-800 rounded-lg p-4 shadow' },
+      React.createElement('h2', { className: 'text-xl text-white mb-3 font-semibold' }, title),
+      React.createElement('ul', { className: 'space-y-2' },
+        items.map((item, idx) =>
+          React.createElement('li', { key: idx },
+            React.createElement('a', { href: item.url, target: '_blank', className: 'text-indigo-400 hover:underline' }, item.title)
+          )
+        )
+      )
     )
   );
 }
 
-function ContentGrid({ posts }) {
+function MainContent({ data }) {
+  const sections = [
+    { title: 'Top LLM Models', items: data.llmModels.map(m => ({ title: m.id, url: `https://huggingface.co/${m.id}` })) },
+    { title: 'Top Embedding Models', items: data.embeddingModels.map(m => ({ title: m.id, url: `https://huggingface.co/${m.id}` })) },
+    { title: 'Top 5 GenAI News', items: data.genaiNews.map(n => ({ title: n.title, url: n.url || n.story_url })) },
+    { title: 'Top 5 AI News', items: data.aiNews.map(n => ({ title: n.title, url: n.url || n.story_url })) },
+    { title: 'Trending GitHub Repos', items: data.repos.map(r => ({ title: r.full_name, url: r.html_url })) },
+    { title: 'Latest Research Papers', items: data.papers },
+    { title: 'Popular AI Videos', items: data.videos }
+  ];
   return (
-    React.createElement('div', { className: 'grid gap-4 mx-4 md:ml-64 sm:grid-cols-2 lg:grid-cols-3' },
-      posts.map(p => React.createElement(PostCard, { key: p.title, post: p }))
+    React.createElement('main', { className: 'grid gap-4 mx-4 md:ml-64 lg:mr-64 sm:grid-cols-2 xl:grid-cols-3' },
+      sections.map(s => React.createElement(Section, { key: s.title, title: s.title, items: s.items }))
     )
   );
 }
@@ -123,7 +138,7 @@ function DashboardApp({ data }) {
       React.createElement(Header, { user: data.user, onMenu: () => setMenuOpen(!menuOpen) }),
       React.createElement(Banner, null),
       React.createElement(SearchFilters, null),
-      React.createElement(ContentGrid, { posts: data.news }),
+      React.createElement(MainContent, { data: data }),
       React.createElement(RightPanels, null)
     )
   );
@@ -135,3 +150,9 @@ window.renderDashboard = function(data) {
     document.getElementById('root')
   );
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.__DATA__) {
+    window.renderDashboard(window.__DATA__);
+  }
+});
