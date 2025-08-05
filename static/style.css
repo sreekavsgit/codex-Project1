@@ -1,2 +1,4 @@
-body { font-family: Arial, sans-serif; }
-/* override Tailwind for background gradient body? not necessary */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}

@@ -12,9 +12,9 @@ ARXIV_URL = "https://export.arxiv.org/api/query"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 
 
-def fetch_hn_news():
+def fetch_hn_news(query: str):
     params = {
-        "query": "AI",
+        "query": query,
         "tags": "story",
         "hitsPerPage": 5,
     }
@@ -40,10 +40,11 @@ def fetch_github_repos():
         return []
 
 
-def fetch_huggingface_models():
+def fetch_huggingface_models(pipeline_tag: str):
     params = {
         "limit": 5,
         "sort": "downloads",
+        "pipeline_tag": pipeline_tag,
     }
     try:
         r = requests.get(HFACE_URL, params=params, timeout=10)
@@ -105,17 +106,21 @@ def fetch_youtube_videos():
 
 @app.route("/")
 def index():
-    news = fetch_hn_news()
+    genai_news = fetch_hn_news("Generative AI")
+    ai_news = fetch_hn_news("AI")
     repos = fetch_github_repos()
-    models = fetch_huggingface_models()
+    llm_models = fetch_huggingface_models("text-generation")
+    embedding_models = fetch_huggingface_models("feature-extraction")
     papers = fetch_arxiv_papers()
     videos = fetch_youtube_videos()
     user = {"name": "AI Enthusiast", "avatar": "https://via.placeholder.com/40"}
     return render_template(
         "index.html",
-        news=news,
+        genai_news=genai_news,
+        ai_news=ai_news,
         repos=repos,
-        models=models,
+        llm_models=llm_models,
+        embedding_models=embedding_models,
         papers=papers,
         videos=videos,
         user=user,
