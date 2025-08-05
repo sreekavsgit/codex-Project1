@@ -16,7 +16,13 @@
     <script>
         window.__DATA__ = {
             user: {{ user|tojson }},
-            news: {{ news|tojson }}
+            genaiNews: {{ genai_news|tojson }},
+            aiNews: {{ ai_news|tojson }},
+            repos: {{ repos|tojson }},
+            llmModels: {{ llm_models|tojson }},
+            embeddingModels: {{ embedding_models|tojson }},
+            papers: {{ papers|tojson }},
+            videos: {{ videos|tojson }}
         };
     </script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
