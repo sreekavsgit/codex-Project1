@@ -135,3 +135,9 @@ window.renderDashboard = function(data) {
     document.getElementById('root')
   );
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.__DATA__) {
+    window.renderDashboard(window.__DATA__);
+  }
+});
